@@ -2,11 +2,19 @@ const express = require('express')
 
 const app = express()
 
-app.use("/home",(req,res)=>{
-    res.send("HELLO SERVER HEllo")
+
+app.use("/home/3",(req,res)=>{
+    res.send("HELLO SERVER 3")
 })
-app.use("/text",(req,res)=>{
-    res.send("HELLO SERVER LIKHITH")
+// app.use("/home",(req,res)=>{
+//     res.send("HELLO SERVER HEllo")
+// })
+// app.use("/text",(req,res)=>{
+//     res.send("HELLO SERVER LIKHITH")
+// })
+
+app.post("/user",(req,res)=>{
+    res.send({"firstname":"LIKHITH", "secondname":"puttabakula"})
 })
 
 app.listen(7777,()=>{
@@ -14,4 +22,7 @@ app.listen(7777,()=>{
 })
 app.listen(8888,()=>{
     console.log('CONNECTED TO SERVER !')
+})
+app.use("/",(req,res)=>{
+    res.send("hello /")
 })
