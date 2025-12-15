@@ -13,7 +13,8 @@ app.use("/home/3",(req,res)=>{
 //     res.send("HELLO SERVER LIKHITH")
 // })
 
-app.post("/user",(req,res)=>{
+app.post("/user/:userID/:password",(req,res)=>{
+    console.log(req.params)
     res.send({"firstname":"LIKHITH", "secondname":"puttabakula"})
 })
 
