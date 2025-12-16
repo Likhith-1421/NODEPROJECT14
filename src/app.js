@@ -2,21 +2,26 @@ const express = require('express')
 
 const app = express()
 
+const {admin} = require("./middleware/auth")
+app.use("/auth", admin)
 
-// app.use("/home/3",(req,res)=>{
-//     res.send("HELLO SERVER 3")
+// app.get("/auth/corret",(req,res)=>
+// {
+//     res.send("HELLO LIKHITH")
 // })
-app.use("/testing",(req,res,next)=>{
-    console.log("route 1")
-    next()
-},
-(req,res,next)=>{
- console.log('route 2')
- next()
-},
-(req,res,next)=>{
-   res.send("HELLO EVERY ONE!!")    
+app.use("/error",(req,res)=>{
+   throw new error("hufuydvcvb");
+   
 })
+
+app.use("/",(err,req,res,next)=>
+{
+  if(err)
+    {
+        res.status(500).send("Something went wrong!!")
+    }
+})
+
 app.listen(8888,()=>{
     console.log('CONNECTED TO SERVER !')
 })
