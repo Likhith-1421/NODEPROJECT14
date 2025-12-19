@@ -1,30 +1,58 @@
 const express = require('express')
-
+const database = require("./config/database")
+const User = require("./model/UserSchema")
 const app = express()
 
-const {admin} = require("./middleware/auth")
-app.use("/auth", admin)
+app.post("/signup", async(req,res)=>{
+    const user = User({
+        firstName : "NAGARAJU",
+        lastName : "PUTTABAKULA",
+        phoneNumber : 8247354469,
+    })
 
-// app.get("/auth/corret",(req,res)=>
-// {
-//     res.send("HELLO LIKHITH")
-// })
-app.use("/error",(req,res)=>{
-   throw new error("hufuydvcvb");
+    try{
+    await user.save()
+    res.send("FIND DATA IN DATABASE")
+    }
+    catch(err)
+    {
+        res.status(400).send("connection failed")
+    }
+
+
    
 })
 
-app.use("/",(err,req,res,next)=>
-{
-  if(err)
-    {
-        res.status(500).send("Something went wrong!!")
-    }
+
+database()
+.then(()=>{
+    console.log("DATA BASE CONNECTED SUCCESFULLY")
+    app.listen(8888,()=>{console.log("connected to port 8888")})
 })
 
-app.listen(8888,()=>{
-    console.log('CONNECTED TO SERVER !')
-})
+// const {admin} = require("./middleware/auth")
+// app.use("/auth", admin)
+
+// // app.get("/auth/corret",(req,res)=>
+// // {
+// //     res.send("HELLO LIKHITH")
+// // })
+// app.use("/error",(req,res)=>{
+//    throw new error("hufuydvcvb");
+   
+// })
+
+// app.use("/",(err,req,res,next)=>
+// {
+//   if(err)
+//     {
+//         res.status(500).send("Something went wrong!!")
+//     }
+// })
+
+// app.listen(8888,()=>{
+//     console.log('CONNECTED TO SERVER !')
+// })
 
 
 
