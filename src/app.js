@@ -3,20 +3,20 @@ const database = require("./config/database")
 const User = require("./model/UserSchema")
 const app = express()
 
+app.use(express.json())
 app.post("/signup", async(req,res)=>{
-    const user = User({
-        firstName : "NAGARAJU",
-        lastName : "PUTTABAKULA",
-        phoneNumber : 8247354469,
-    })
+
+  
+
+    const user = User(req.body)
 
     try{
     await user.save()
-    res.send("FIND DATA IN DATABASE")
+    res.send("register completed ")
     }
     catch(err)
     {
-        res.status(400).send("connection failed")
+        res.status(400).send("something went wrong")
     }
 
 
