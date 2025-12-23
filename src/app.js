@@ -1,6 +1,8 @@
 const express = require('express')
+
 const database = require("./config/database")
 const User = require("./model/UserSchema")
+
 const app = express()
 
 
@@ -63,6 +65,42 @@ app.get("/delete",async(req,res)=>{
       res.status(404).send("WE ARE SORRY")
    }
 })
+app.get("/id",async(req,res)=>{
+      const usre = req.body._id
+    const result = await  User.findById({_id:usre})
+    res.send(result)
+});
+app.patch("/updatebyfiled",async(req,res)=>{
+  const user =  req.body.firstName
+ const update =  req.body
+ try{   
+    const result = await User.findOneAndUpdate({firstName:user},update,{returnDocument:"after"})
+    res.send("DATA UPDATED")
+   }
+ 
+ 
+ catch(err)
+ {
+     res.status(404).send("DATA NOT UPDATED")
+ }
+})
+
+app.patch("/updatebyid",async(req,res)=>{
+   const user = req.body._id
+  const update = req.body
+  try{
+     await  User.findByIdAndUpdate({_id:user},update,{  runValidators : true})
+   
+     res.send("DATA UPTADED")
+  }
+  catch(err)
+  {
+     res.status(404).send("DATA NOT FOUND" + err.message)
+  }
+
+})
+
+
 
 database()
 .then(()=>{
