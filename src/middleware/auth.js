@@ -1,15 +1,29 @@
-const admin = (req,res,next)=>
+const jwt = require("jsonwebtoken")
+const User = require("../model/UserSchema")
+const auth = async(req,res,next)=>
 {
-    const token = "xyzy"
-    const result = token === "xyz";
-    if(!result)
-    {
-        res.status(401).send("YOU ARE NOT LIKHITH")
+   try{const {token} = req.cookies
+   if(!token)
+   {
+    throw new Error("TOKEN IS NOT VALID PLEASE LOGIN")
+   }
+   const decodedmessage = await jwt.verify(token,"Likhith@1421")
+const {idname} = decodedmessage
+//    console.log(idname)
+   const result = await User.findOne({emailID : idname })
+ console.log(result)
+   if(!result){
+    throw new Error ("USER NOT FOUND")
     }
-    else{
-        next()
-    }
+    req.result = result
+   next()
 }
-module.exports = {
-    admin
+   catch(err)
+   {
+    res.status(404).send("ERROR" + err.message)
+   }
+  
 }
+
+module.exports = { auth}
+ 
