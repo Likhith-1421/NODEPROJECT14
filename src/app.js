@@ -7,21 +7,8 @@ const profileRouter = require("./routers/profileRouter")
 const app = express()
 app.use(express.json())
 app.use(cookieParser())
-app.use("/",authRouter)
-app.use("/",profileRouter)
-
-
-
-
-
-
-
-
-
-
-
-
-
+app.use("/", authRouter)
+app.use("/", profileRouter)
 app.get("/findall", async (req, res) => {
    try {
       const result = await User.find({})
@@ -88,21 +75,21 @@ app.patch("/updatebyid", async (req, res) => {
    const user = req.body._id
    const update = req.body
    try {
-      const ALLOWED_UPDATES = ["_id","firstName", "lastName", "phoneNumber", "age", "skills"]
+      const ALLOWED_UPDATES = ["_id", "firstName", "lastName", "phoneNumber", "age", "skills"]
       const is_updated = Object.keys(update).every((k) => ALLOWED_UPDATES.includes(k));
 
-       if (!is_updated) {
+      if (!is_updated) {
          throw new Error("FILED CAN'T BE UPDATED")
       };
       //  if(update.skills.length > 10)
       // {
       //    throw new Error("skills must be lessthan 10")
       // }
-       await User.findByIdAndUpdate({ _id : user }, update, { runValidators: true });
-            res.send("DATA UPTADED")
+      await User.findByIdAndUpdate({ _id: user }, update, { runValidators: true });
+      res.send("DATA UPTADED")
    }
    catch (err) {
-     res.status(404).send("UPDATE FAILED :" + err.message)
+      res.status(404).send("UPDATE FAILED :" + err.message)
    }
 
 })

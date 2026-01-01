@@ -1,54 +1,51 @@
 const mongoose = require("mongoose")
 const validate = require("validator")
 const UserSchema = new mongoose.Schema({
-    firstName : {
+    firstName: {
 
-        type : String,
-        required : true,
-        
+        type: String,
+        required: true,
+
     },
-    lastName :{
-        type :String
+    lastName: {
+        type: String
     },
-    age :{
-        type : Number
+    age: {
+        type: Number
     },
     emailID:
     {
-        type : String,
-        required : true,
-        unique : true,
-        validate(value)
-        {
-            if(!validate.isEmail(value))
-            {
+        type: String,
+        required: true,
+        unique: true,
+        validate(value) {
+            if (!validate.isEmail(value)) {
                 throw new Error("INVALID Email")
             }
         }
     },
-    password :{
-        type : String,  
+    password: {
+        type: String,
     },
-    phoneNumber:{
-        type : Number,
-        min : 15
+    phoneNumber: {
+        type: Number,
+        min: 15
     },
-    gender :{
-        type : String,
-    validate(value){
-        if(!["male","female","others"].includes(value))
-        {
-            throw new Error("invalid gender");
-            
-        }
-    }
-    },
-    skills :{
-        type : Array
-    }
-},{
-    timestamps : true
-}) 
+    gender: {
+        type: String,
+        validate(value) {
+            if (!["male", "female", "others"].includes(value)) {
+                throw new Error("invalid gender");
 
-const User = mongoose.model("user",UserSchema)
+            }
+        }
+    },
+    skills: {
+        type: Array
+    }
+}, {
+    timestamps: true
+})
+
+const User = mongoose.model("user", UserSchema)
 module.exports = User

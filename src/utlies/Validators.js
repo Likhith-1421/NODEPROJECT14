@@ -13,4 +13,14 @@ const validateUpdate = (req) =>{
         throw new Error("PLEASE ENTER A STRONG PASSWORD")
     }
 } 
-module.exports = validateUpdate
+
+const validateprofileeditdata = (req) =>{
+
+    const allowedfields = ["firstName","lastName","emailID","age","phoneNumber","gender"]
+
+const isallowed =  Object.keys(req.body).every((fields)=>allowedfields.includes(fields))
+return isallowed
+}
+module.exports = {validateUpdate,
+    validateprofileeditdata
+}
