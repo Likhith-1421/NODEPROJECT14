@@ -1,0 +1,61 @@
+const express = require("express")
+const validateUpdate = require("../utlies/Validators")
+const authRouter = express.Router()
+const User = require("../model/UserSchema")
+const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken")
+
+authRouter.post("/signup", async (req, res) => {
+   try{
+   
+   
+   validateUpdate(req)    //data validattion
+
+   const {firstName,lastName,emailID,password} = req.body
+   const passwordhash = await bcrypt.hash(password , 10)   //password bcrypting(securing our password with hash)
+
+const user = User({
+   firstName,
+   lastName,
+   emailID,
+   password : passwordhash
+});
+   console.log(user)
+ await user.save()
+   res.send("LOGIN SUCCESSFUL")
+}
+catch(err)
+{
+    res.status(404).send("ERROR : " + err.message)
+}
+  
+});
+
+authRouter.post("/login",async(req,res)=>{
+  try{
+ const {emailID,password} = req.body
+   const find = await User.findOne({emailID : emailID})
+   if(!find)
+   {
+       throw new Error("INVALID EMAIL")
+   }
+ const password_correct = await bcrypt.compare(password,find.password) 
+
+
+ if(password_correct){
+
+   const token = jwt.sign({idname : find.emailID},"Likhith@1421")
+   res.cookie("token",token)
+   res.send("LOGIN SUCCESSFULLYyyyyy")
+ }
+ else
+ {
+     throw new Error("INCORRECT PASSWORD")
+ }
+  }
+   catch (err) {
+     res.status(404).send("UPDATE FAILED :" + err.message)
+   }
+  
+})
+module.exports = authRouter

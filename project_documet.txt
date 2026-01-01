@@ -1,0 +1,22 @@
+                                       *PROJECT-NODE.JS*
+                                       ================
+
+** AUTH-ROUTER
+Post -> /signup
+Post -> /login
+Post -> /logout
+-------------------------------------------------
+** PROFILE-ROUTER
+Get    -> /Profile
+Patch  -> /Profile/edit
+Ptach  -> /Profile/Password_update
+-------------------------------------------------
+** CONECTION-ROUTER
+Post   -> /Connection/Send/like
+Post   -> /Connection/Send/Pass
+Post   -> /Connection/Review/Accepted
+Post   -> /Connection/Review/Rejected
+-------------------------------------------------
+
+Get    -> /User/Connections
+Get    -> /User/Requests
