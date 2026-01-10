@@ -1,5 +1,5 @@
 const express = require("express")
-const validateUpdate = require("../utlies/Validators")
+const {validateUpdate} = require("../utlies/Validators")
 const authRouter = express.Router()
 const User = require("../model/UserSchema")
 const bcrypt = require("bcrypt")

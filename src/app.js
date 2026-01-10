@@ -3,12 +3,13 @@ const database = require("./config/database")
 const cookieParser = require("cookie-parser")
 const authRouter = require("./routers/authRouter")
 const profileRouter = require("./routers/profileRouter")
-
+const connectionRouter = require("./routers/connectionRouter")
 const app = express()
 app.use(express.json())
 app.use(cookieParser())
 app.use("/", authRouter)
 app.use("/", profileRouter)
+app.use("/",connectionRouter)
 app.get("/findall", async (req, res) => {
    try {
       const result = await User.find({})

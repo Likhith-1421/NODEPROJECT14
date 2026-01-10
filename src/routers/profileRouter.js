@@ -2,6 +2,7 @@ const express = require("express")
 const { auth } = require("../middleware/auth")
 const profileRouter = express.Router()
 const { validateprofileeditdata } = require("../utlies/Validators")
+
 profileRouter.get("/profile/view", auth, async (req, res) => {
    try {
 
@@ -22,9 +23,9 @@ profileRouter.patch("/profile/edit", auth, (req, res) => {
 
       }
       const login = req.result;
-      console.log(login)
+   
       Object.keys(req.body).forEach((fields) => (login[fields] = req.body[fields]))
-      console.log(login)
+     
 
       login.save()
       res.send("profile updated successfully")
