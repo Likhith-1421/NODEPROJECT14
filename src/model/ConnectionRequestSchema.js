@@ -2,10 +2,12 @@ const mongoose = require("mongoose")
 
 const connectionSchema = new mongoose.Schema({
     formUserID :{
-        type : mongoose.Schema.Types.ObjectId
+        type : mongoose.Schema.Types.ObjectId,
+        ref : "user"
     },
     toUserID : {
-        type : mongoose.Schema.Types.ObjectId
+        type : mongoose.Schema.Types.ObjectId,
+        ref : "user"
     },
     status:{
         type : String,
@@ -24,15 +26,15 @@ const connectionSchema = new mongoose.Schema({
 //     next()
 // })
 
-connectionSchema.pre("save", function () {
-    if (!this.formUserID || !this.toUserID) {
-        throw new Error("User IDs are required");
-    }
+// connectionSchema.pre("save", function () {
+//     if (!this.formUserID || !this.toUserID) {
+//         throw new Error("User IDs are required");
+//     }
 
-    if (this.formUserID.equals(this.toUserID)) {
-        throw new Error("YOU CAN'T SEND CONNECTION TO YOURSELF");
-    }
-});
+//     if (this.formUserID.equals(this.toUserID)) {
+//         throw new Error("YOU CAN'T SEND CONNECTION TO YOURSELF");
+//     }
+// });
 
 
 

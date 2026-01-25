@@ -4,12 +4,21 @@ const cookieParser = require("cookie-parser")
 const authRouter = require("./routers/authRouter")
 const profileRouter = require("./routers/profileRouter")
 const connectionRouter = require("./routers/connectionRouter")
+const cors = require("cors")
 const app = express()
+app.use(cors())
 app.use(express.json())
 app.use(cookieParser())
+
+// app.use((req, res, next) => {
+//   console.log("HIT 👉", req.method, req.url);
+//   next();
+// });
+
 app.use("/", authRouter)
 app.use("/", profileRouter)
 app.use("/",connectionRouter)
+
 app.get("/findall", async (req, res) => {
    try {
       const result = await User.find({})

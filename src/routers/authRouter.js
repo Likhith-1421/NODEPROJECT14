@@ -44,7 +44,7 @@ authRouter.post("/login", async (req, res) => {
 
       const token = jwt.sign({ idname: find.emailID }, "Likhith@1421")
       res.cookie("token", token)
-      res.send("LOGIN SUCCESSFULLYyyyyy")
+      res.send(find)
     }
     else {
       throw new Error("INCORRECT PASSWORD")
