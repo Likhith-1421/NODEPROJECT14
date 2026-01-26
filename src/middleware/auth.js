@@ -4,7 +4,7 @@ const auth = async (req, res, next) => {
    try {
       const { token } = req.cookies
       if (!token) {
-         throw new Error("TOKEN IS NOT VALID PLEASE LOGIN")
+         throw new Error("Please Login")
       }
       const decodedmessage = await jwt.verify(token, "Likhith@1421")
       const { idname } = decodedmessage

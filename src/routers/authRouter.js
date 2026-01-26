@@ -51,7 +51,7 @@ authRouter.post("/login", async (req, res) => {
     }
   }
   catch (err) {
-    res.status(404).send("UPDATE FAILED :" + err.message)
+    res.status(404).send( err.message)
   }
 
 })
