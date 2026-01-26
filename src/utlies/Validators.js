@@ -15,7 +15,7 @@ const validateUpdate = (req) => {
 
 const validateprofileeditdata = (req) => {
 
-    const allowedfields = ["firstName", "lastName", "emailID", "age", "phoneNumber", "gender"]
+    const allowedfields = ["firstName", "lastName", "emailID", "age", "phoneNumber", "gender","photourl"]
 
     const isallowed = Object.keys(req.body).every((fields) => allowedfields.includes(fields))
     return isallowed

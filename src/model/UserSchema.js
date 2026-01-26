@@ -31,6 +31,9 @@ const UserSchema = new mongoose.Schema({
         type: Number,
         min: 15
     },
+    photourl :{
+        type : String
+    },
     gender: {
         type: String,
         validate(value) {
