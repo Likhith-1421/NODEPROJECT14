@@ -16,7 +16,7 @@ profileRouter.get("/profile/view", auth, async (req, res) => {
 
 })
 
-profileRouter.patch("/profile/edit", auth, (req, res) => {
+profileRouter.post("/profile/edit", auth, (req, res) => {
    try {
       if (!validateprofileeditdata(req)) {
          throw new Error("DATA CAN'T BE UPDATED")
@@ -28,7 +28,7 @@ profileRouter.patch("/profile/edit", auth, (req, res) => {
      
 
       login.save()
-      res.send("profile updated successfully")
+      res.send(login)
    }
 
 
