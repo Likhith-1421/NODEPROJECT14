@@ -15,13 +15,6 @@ const validateUpdate = (req) => {
 
 const validateprofileeditdata = (req) => {
 
-//    if (req.body.gender) {
-//   const allowedGenders = ["male", "female", "others"]
-
-//   if (!allowedGenders.includes(req.body.gender)) {
-//     throw new Error("Invalid gender")
-//   }
-// }
 
 const gender = ["male","female","others"]
 if(!gender.includes(req.body.gender))
