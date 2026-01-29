@@ -22,15 +22,16 @@ profileRouter.post("/profile/edit", auth, (req, res) => {
          throw new Error("DATA CAN'T BE UPDATED")
 
       }
+   
+  
       const login = req.result;
    
       Object.keys(req.body).forEach((fields) => (login[fields] = req.body[fields]))
      
 
       login.save()
-      res.send(login)
+     res.send(login)
    }
-
 
    catch (err) {
       res.status(400).send("ERROR : " + err.message)

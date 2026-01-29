@@ -15,10 +15,28 @@ const validateUpdate = (req) => {
 
 const validateprofileeditdata = (req) => {
 
-    const allowedfields = ["firstName", "lastName",  "age", "phoneNumber", "gender","photourl"]
+//    if (req.body.gender) {
+//   const allowedGenders = ["male", "female", "others"]
 
+//   if (!allowedGenders.includes(req.body.gender)) {
+//     throw new Error("Invalid gender")
+//   }
+// }
+
+const gender = ["male","female","others"]
+if(!gender.includes(req.body.gender))
+{
+    throw new Error("invalid gender")
+}
+
+    const allowedfields = ["firstName", "lastName",  "age", "phoneNumber", "gender","photourl"]
+  
+ 
     const isallowed = Object.keys(req.body).every((fields) => allowedfields.includes(fields))
+    
     return isallowed
+    
+
 }
 
 
