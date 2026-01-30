@@ -80,9 +80,9 @@ connectionRouter.post("/review/:status/:requestID", auth, async (req, res) => {
 
 })
 
-connectionRouter.get("/User/pending/connections", auth, async (req, res) => {
+connectionRouter.get("/User/pending/requests", auth, async (req, res) => {
   try {
-    const dataString = "firstName"
+   const dataString = ["firstName","lastName","age","gender","photourl","about"]
     const loginUser = req.result
     const connectionRequest = await ConnectionModel.find({
       toUserID: loginUser._id,
@@ -97,7 +97,7 @@ connectionRouter.get("/User/pending/connections", auth, async (req, res) => {
 
 connectionRouter.get("/User/connections", auth, async (req, res) => {
   try {
-    const dataString = "firstName"
+    const dataString = ["firstName","lastName","age","gender","photourl"]
     const loginUser = req.result
     const connectionRequest = await ConnectionModel.find({
       $or: [{ toUserID: loginUser, status: "ACCEPTED" },

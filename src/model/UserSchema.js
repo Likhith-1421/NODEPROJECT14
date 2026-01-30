@@ -34,6 +34,7 @@ const UserSchema = new mongoose.Schema({
     photourl :{
         type : String
     },
+  
     gender: {
         type: String,
         validate(value) {
@@ -42,6 +43,9 @@ const UserSchema = new mongoose.Schema({
 
             }
         }
+    },
+      about : {
+        type : String
     },
     skills: {
         type: Array
