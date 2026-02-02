@@ -21,8 +21,16 @@ authRouter.post("/signup", async (req, res) => {
       password: passwordhash
     });
     console.log(user)
-    await user.save()
-    res.send("LOGIN SUCCESSFUL")
+   const savedData  = await user.save()
+
+  //  const token = await savedData.getJWT()
+  //     res.cookie("token", token)
+  
+  const token = await jwt.sign({ idname: savedData.emailID }, "Likhith@1421")
+  res.json({token,message : "successfully Registered"})
+
+  
+    // res.send("LOGIN SUCCESSFUL")
   }
   catch (err) {
     res.status(404).send("ERROR :" + err.message)
@@ -42,7 +50,7 @@ authRouter.post("/login", async (req, res) => {
 
     if (password_correct) {
 
-      const token = jwt.sign({ idname: find.emailID }, "Likhith@1421")
+   const token = await find.getJWT()
       res.cookie("token", token)
       res.send(find)
     }
