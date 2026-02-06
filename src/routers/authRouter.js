@@ -27,7 +27,7 @@ authRouter.post("/signup", async (req, res) => {
   //     res.cookie("token", token)
   
   const token = await jwt.sign({ idname: savedData.emailID }, "Likhith@1421")
-  res.json({token,message : "successfully Registered"})
+  res.cookie("token", token)
 
   
     // res.send("LOGIN SUCCESSFUL")
