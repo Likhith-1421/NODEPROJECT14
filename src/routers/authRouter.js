@@ -30,7 +30,7 @@ authRouter.post("/signup", async (req, res) => {
   res.cookie("token", token)
 
   
-    // res.send("LOGIN SUCCESSFUL")
+    res.send("LOGIN SUCCESSFUL")
   }
   catch (err) {
     res.status(404).send("ERROR :" + err.message)
